@@ -1,14 +1,632 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <title>123</title>
+    <title>我们的爱</title>
     <link href="http://koke.love/feed.xml" rel="self" />
     <link href="http://koke.love" />
-    <updated>2022-07-31T15:51:13+08:00</updated>
+    <updated>2022-07-31T16:18:46+08:00</updated>
     <author>
         <name>koke</name>
     </author>
     <id>http://koke.love</id>
 
+    <entry>
+        <title>Vim编辑器与Shell命令脚本</title>
+        <author>
+            <name>koke</name>
+        </author>
+        <link href="http://koke.love/vimbian-ji-qi-yu-shellming-ling-jiao-ben.html"/>
+        <id>http://koke.love/vimbian-ji-qi-yu-shellming-ling-jiao-ben.html</id>
+
+        <updated>2022-07-31T16:18:46+08:00</updated>
+            <summary>
+                <![CDATA[
+                    vi/vim编辑器 vim编辑器有颜色，vi编辑器没有 默认打开：命令模式 编辑模式： i，a，o 末行模式： 进入到网卡配置文件所在的目录，然后编辑网卡配置文件，在其中填入下面的信息： [root@linuxprobe ~]# cd /etc/sysconfig/network-scripts/ [root@linuxprobe network-scripts]# vim ifcfg-ens160 TYPE=Ethernet BOOTPROTO=static NAME=ens160 ONBOOT=yes IPADDR=192.168.10.10 NETMASK=255.255.255.0 GATEWAY=192.168.10.1 DNS1=192.168.10.1 执行重启网卡设备的命令，然后通过ping命令测试网络能否连通。 systemctl restart network nmcli connection reload ens160 ping 192.168.10.10 Shell命令脚本 **1、 交互式（Interactive）**：用户每输入一条命令就立即执行。 **2、批处理（Batch）**：由用户事先编写好一个完整的Shell脚本，Shell会一次性执行脚本中诸多的命令。 脚本声明 #!/bin/bash 脚本注释 #txykoke.cn编写 脚本命令 ls pwd #!/bin/bash&hellip;
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <h3 id="vivim编辑器">vi/vim编辑器</h3>
+<p>vim编辑器有颜色，vi编辑器没有</p>
+<p>默认打开：命令模式</p>
+<p>编辑模式： i，a，o</p>
+<p>末行模式：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:w</td>
+<td>保存</td>
+</tr>
+<tr>
+<td>:q</td>
+<td>退出</td>
+</tr>
+<tr>
+<td>:q!</td>
+<td>强制退出（放弃对文档的修改内容）</td>
+</tr>
+<tr>
+<td>:wq!</td>
+<td>强制保存退出</td>
+</tr>
+<tr>
+<td>:set nu</td>
+<td>显示行号</td>
+</tr>
+<tr>
+<td>:set nonu</td>
+<td>不显示行号</td>
+</tr>
+<tr>
+<td>:命令</td>
+<td>执行该命令</td>
+</tr>
+<tr>
+<td>:整数</td>
+<td>跳转到该行</td>
+</tr>
+<tr>
+<td>:s/one/two</td>
+<td>将当前光标所在行的第一个one替换成two</td>
+</tr>
+<tr>
+<td>:s/one/two/g</td>
+<td>将当前光标所在行的所有one替换成two</td>
+</tr>
+<tr>
+<td>:%s/one/two/g</td>
+<td>将全文中的所有one替换成two</td>
+</tr>
+<tr>
+<td>?字符串</td>
+<td>在文本中从下至上搜索该字符串</td>
+</tr>
+<tr>
+<td>/字符串</td>
+<td>在文本中从上至下搜索该字符串</td>
+</tr>
+</tbody></table>
+<h3 id="使用vim配置网卡信息">使用vim配置网卡信息</h3>
+<p>进入到网卡配置文件所在的目录，然后编辑网卡配置文件，在其中填入下面的信息：</p>
+<pre><code class="language-shell">[root@linuxprobe ~]# cd /etc/sysconfig/network-scripts/
+[root@linuxprobe network-scripts]# vim ifcfg-ens160
+TYPE=Ethernet
+BOOTPROTO=static
+NAME=ens160
+ONBOOT=yes
+IPADDR=192.168.10.10
+NETMASK=255.255.255.0
+GATEWAY=192.168.10.1
+DNS1=192.168.10.1
+</code></pre>
+<p>执行重启网卡设备的命令，然后通过ping命令测试网络能否连通。</p>
+<pre><code class="language-shell">systemctl restart network
+nmcli connection reload ens160
+ping 192.168.10.10
+</code></pre>
+<h3 id="shell命令脚本">Shell命令脚本</h3>
+<p>**<font color="#0000dd">1、 交互式（Interactive）</font>**：用户每输入一条命令就立即执行。
+**<font color="#0000dd">2、批处理（Batch）</font>**：由用户事先编写好一个完整的Shell脚本，Shell会一次性执行脚本中诸多的命令。</p>
+<p>脚本声明  #!/bin/bash</p>
+<p>脚本注释  #txykoke.cn编写</p>
+<p>脚本命令  ls pwd</p>
+<pre><code class="language-shell"> #!/bin/bash
+ #txykoke.cn编写
+ echo &quot;$0&quot; 脚本名称
+ echo &quot;$#&quot; 总共接受了几个参数
+ echo &quot;$*&quot;参数分别是什么
+ echo &quot;$1,$2,$5&quot; 接收到第1个第3个第5个的参数
+</code></pre>
+<pre><code>[root@txykoke koke]# bash haha.sh a b c d e f
+haha.sh
+6
+a b c d e f
+a,b,e
+[root@txykoke koke]# 
+</code></pre>
+<p>测试语句格式：[ 条件表达式 ] （两边均有一个空格）</p>
+<h3 id="文件测试所用的参数">文件测试所用的参数</h3>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-d</td>
+<td>测试文件是否为目录类型</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>测试文件是否存在</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>判断是否为一般文件</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>测试当前用户是否有权限读取</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>测试当前用户是否有权限写入</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>测试当前用户是否有权限执行</td>
+</tr>
+</tbody></table>
+<p><strong><font color="#0000dd">判断是否是目录</font></strong></p>
+<pre><code class="language-shell">#如果返回值为0，则目录存在；如果返回值为非零的值，则意味着它不是目录，或这个目录不存在
+[ -d /etc/koke ]
+echo $?
+</code></pre>
+<pre><code class="language-shell">#判断/dev/cdrom文件是否存在，若存在则输出Exist字样。
+[ -e /dev/cdrom ] &amp;&amp; echo &quot;Exist&quot;
+</code></pre>
+<pre><code class="language-shell">#判断用户是否不是管理员账户，不是管理员账号账户则输出root
+[ ! $USER = root ] || echo &quot;root&quot;
+</code></pre>
+<pre><code class="language-shell">#先判断当前用户是否root,然后!取反，如果当前不是root用户，则输出user,反之输出root
+[ ! $USER = root ] &amp;&amp; echo &quot;user&quot; || echo &quot;root&quot;
+</code></pre>
+<h3 id="tips"><strong>Tips</strong></h3>
+<p>&amp;&amp;是逻辑“与”，只有当前面的语句执行成功的时候才会执行后面的语句。
+||是逻辑“或”，只有当前面的语句执行失败的时候才会执行后面的语句。
+!是逻辑“非”，代表对逻辑测试结果取反值；之前若为正确则变成错误，若为错误则变成正确。</p>
+<h3 id="整数比较运算符">整数比较运算符</h3>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-eq</td>
+<td>是否等于</td>
+</tr>
+<tr>
+<td>-ne</td>
+<td>是否不等于</td>
+</tr>
+<tr>
+<td>-gt</td>
+<td>是否大于</td>
+</tr>
+<tr>
+<td>-lt</td>
+<td>是否小于</td>
+</tr>
+<tr>
+<td>-le</td>
+<td>是否等于或小于</td>
+</tr>
+<tr>
+<td>-ge</td>
+<td>是否大于或等于</td>
+</tr>
+</tbody></table>
+<pre><code class="language-shell">#创建一个变量num 如果10大于num成立 则输出0
+num=100;
+[ 10 -gt $num ]
+echo $?
+</code></pre>
+<pre><code class="language-shell">#判断当前服务器内存，并设置警告值
+FreeMem=`free -m |grep Mem: |awk &#39;{print$4}&#39;`
+[ $FreeMem -lt 300] &amp;&amp; echo &quot;内存告急：小于300m,请检查/升级配置&quot;|| echo &quot;内存余量正常&quot;
+</code></pre>
+<p> <strong><font color="#0000dd">常见的字符串比较运算符</font></strong></p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>=</td>
+<td>比较字符串内容是否相同</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>比较字符串内容是否不同</td>
+</tr>
+<tr>
+<td>-z</td>
+<td>判断字符串内容是否为空</td>
+</tr>
+</tbody></table>
+<pre><code class="language-shell">#接下来通过判断FreeMem变量是否为空值，进而判断是否定义了这个变量：
+[ -z $FreeMem ]
+echo $?
+[ -z $LANG ]
+echo $?
+</code></pre>
+<h3 id="流程控制语句"><strong>流程控制语句</strong></h3>
+<p><strong><font color="#0000dd">if条件测试语句</font></strong></p>
+<pre><code class="language-shell">#!/bin/bash
+#测试主机是否在线
+read -p &quot;请输入您的ip地址：&quot;  ip
+ping -c 3 -i 0.2 -W 3 $ip &amp;&gt; /dev/null
+if [ `echo $?` -eq 0 ];then
+    echo &quot;地址 $ip 是在线的&quot;
+else 
+    echo &quot;地址 $ip 是不在线的&quot;
+fi
+</code></pre>
+<pre><code class="language-shell">#创建成绩表 a.txt
+张三 40
+李四 89
+koke 60
+亚男 59
+</code></pre>
+<pre><code class="language-shell">#!/bin/bash
+#判断学生学习成绩1
+read -p &quot;Enter your score（0-100）：&quot; GRADE
+if [ $GRADE -ge 85 ] &amp;&amp; [ $GRADE -le 100 ] ; then
+        echo &quot;$GRADE is Excellent&quot;
+elif [ $GRADE -ge 70 ] &amp;&amp; [ $GRADE -le 84 ] ; then
+        echo &quot;$GRADE is Pass&quot;
+else
+        echo &quot;$GRADE is Fail&quot; 
+fi
+</code></pre>
+<p><strong><font color="#0000dd">for条件循环语句</font></strong></p>
+<pre><code class="language-shell">#!/bin/bash
+#判断学生学习成绩2
+read -p &quot;请输入您的姓名：&quot; Result
+echo &quot;请稍等，正在查询您的成绩&quot;
+sleep 1
+#备份旧的IFS变量
+OLDIFS=&quot;IFS&quot;  
+#修改分隔符为换行符
+IFS=$&#39;\n&#39;  
+#文件行数
+n=`wc -l a.txt|awk &#39;{print$1}&#39;`
+#循环次数
+s=0
+for name in `cat a.txt`
+do
+    s=`expr $s + 1`
+    if [ `echo $name |awk &#39;{print$1}&#39;` = `echo $Result` ]
+    then
+        echo &quot;您的成绩是：&quot;`echo $name |awk &#39;{print$2}&#39;`&quot;分&quot;
+        #记录分数到num
+        num=`echo $name |awk &#39;{print$2}&#39;`
+        sleep 1
+        if [ $num -ge 85 ]&amp;&amp; [ $num -le 100 ];then
+            echo &quot;您的评级：优秀&quot;
+            break
+        elif [ $num -ge 70 ] &amp;&amp; [ $num -le 84 ];then
+            echo &quot;您的评级：良好&quot;
+            break
+        elif [ $num -ge 60 ] &amp;&amp; [ $num -le 69 ];then
+            echo &quot;您的评级：合格&quot;
+            break
+        elif [ $num -lt 60 ] &amp;&amp; [ $num -ge 0 ];then
+            echo &quot;您的评级：不合格&quot;
+            break
+        else
+            echo &quot;查询到成绩不合法&quot;
+            break
+        fi
+    elif [ $s -eq $n ]&amp;&amp;[ `echo $name |awk &#39;{print$1}&#39;` != `echo $Result` ];then
+        echo &quot;未匹配到您输入的姓名，请检查&quot;
+    fi
+     
+done
+#还原IFS变量
+IFS=&quot;$OLDIFS&quot;
+</code></pre>
+<pre><code class="language-shell">#创建用户名表
+vim users.txt
+andy
+barry
+carl
+duke
+eric
+george
+</code></pre>
+<pre><code class="language-shell">#!/bin/bash
+#批量创建用户
+read -p &quot;请输入你的密码：&quot; PASSWD
+for UNAME in `cat user.txt`
+do
+    id $UNAME $&gt; /dev/null
+    if [ $? -eq 0 ];then
+        echo &quot;$UNAME ,用户已经存在&quot;
+    else
+        useradd $UNAME
+        echo &quot;$PASSWD&quot;|PASSWD ==stdin $UNAME &amp;&gt;/dev/null
+        echo &quot;$UNAME，用户创建成功&quot;
+    fi
+done
+</code></pre>
+<pre><code class="language-shell">#!/bin/bash
+#批量检测IP地址是否在线
+#创建ip地址文件：ipaddr.txt
+Host=`cat ipaddr.txt`
+touch online.txt &amp;&gt; /dev/null
+for IP in $Host
+do
+    ping -c 1 $IP &amp;&gt; /dev/null
+    if [ $? -eq 0 ];then
+        echo $IP &gt;&gt; online.txt
+    else
+        echo &quot;$IP 不在线&quot;
+    fi
+done
+echo &quot;在线IP：&quot;
+cat online.txt
+</code></pre>
+<p><strong>自己做的一个小脚本</strong></p>
+<pre><code class="language-shell">#!/bin/bash
+#经过一些if语句和for循环查询学习,做了这个将疑似DDOS攻击的ip地址加入黑名单，
+#只需要简单设置自己服务器IP以及IP的访问量，就可以一键运行并自动拉黑。
+# 判断是否安装了nload
+if ! type nload &gt;/dev/null 2&gt;&amp;1
+then
+    echo &quot;nload 未安装&quot;
+    yum install nload -y
+    echo &quot;nload 已经安装完成&quot;
+else
+    echo &#39;nload 已安装&#39;
+fi
+
+#判断文件是否存在
+file=&quot;file.txt&quot;
+if [ ! -e $file ]
+then
+
+ echo &quot;文件不存在&quot;
+ touch file.txt
+sleep 2
+echo &quot;文件已创建&quot;
+
+else
+
+ echo &quot;文件已经存在&quot;
+
+fi
+#备份旧的IFS变量
+OLDIFS=&quot;IFS&quot;  
+#修改分隔符为换行符
+IFS=$&#39;\n&#39;  
+touch blacklist.txt &gt;&gt; /dev/null
+touch black.txt &gt;&gt; /dev/null
+#将ip信息存入file.txt
+netstat -ntu|awk &#39;{print $5}&#39;|cut -d: -f1 -s|sort|uniq -c|sort -nk1 -r|sed &#39;s/[\t ]\+/ /g&#39; |sed &#39;/81.68.172.160/&#39;d |sed &#39;/127.0.0.1/&#39;d&gt;file.txt 
+#遍历文件ip
+for ip in `cat file.txt`
+do
+#将取出的ip占有量 临时存放给变量num
+num=`echo $ip | awk &#39;{print $1}&#39;`
+#如果ip占有量超过20
+if [ $num -gt 20 ] 
+then
+#则将ip进行显示
+echo $ip | awk &#39;{print $2}&#39; 
+#将ip加入黑名单
+blacklist=`echo $ip | awk &#39;{print $2}&#39; `
+iptables -I INPUT -s $blacklist -j DROP
+echo $blacklist &gt;&gt; blacklist.txt
+echo $blacklist &gt;&gt; black.txt
+fi
+done
+#cat blacklist.txt|sed -e &#39;/^$/d&#39; &gt; blacklist.txt
+#cat black.txt|sed -e &#39;/^$/d&#39; &gt; black.txt
+if [ -s blacklist.txt ];then
+
+  echo &quot;黑名单列表：&quot;
+  cat blacklist.txt
+  echo &quot;可疑ip已加入黑名单&quot;
+  echo &quot;本脚本加入的黑名单可查看black.txt文件&quot;
+else
+  echo &quot;机器目前状态良好&quot;
+fi
+rm -rf  blacklist.txt
+IFS=&quot;$OLDIFS&quot; #还原IFS变量
+</code></pre>
+<pre><code class="language-shell">#!/bin/bash
+#判断用户，并且批量创建
+read -p &quot;请输入您要设置的用户名的密码：&quot; PASSWD
+for UNAME in `cat user.txt`
+do
+    id $UNAME &amp;&gt; /dec/null
+    if [ $? -eq 0 ];then
+        echo &quot;用户$UNAME已经存在&quot;
+    else
+        useradd $UNAME &amp;&gt; /dev/null
+        echo &quot;$PASSWD&quot;|passwd --stdin $UNAME &amp;&gt; /dev/null
+    fi
+done
+</code></pre>
+<pre><code class="language-shell">#!/bin/bash
+#遍历局域网ip,并测试是否在线
+str=&quot;10.10.1.&quot;
+for ip in {200..220}
+do
+ping -c1 -w1 $str$ip &amp;&gt; /dev/null
+        if [ $? -eq 0 ];then
+                echo &quot;$str$ip 是在线的&quot;
+        fi
+done
+</code></pre>
+<p><strong><font color="#0000dd">while条件循环语句</font></strong></p>
+<pre><code class="language-shell">#!/bin/bash
+#while 语句编写猜数字
+#取100以内的随机数
+RDOM=$(expr $RANDOM % 1000)
+#猜的数字的次数
+sum=0
+echo &quot;------猜数字小游戏------&quot;
+while true
+do
+read -p &quot;请输入一个1000以内的数字：&quot; NUM
+let TIMES++
+expr $NUM + 1 &amp;&gt; /dev/null
+if [ $? != 0 ];then
+    echo &quot;输入有误,请重新输入&quot;
+elif [ $NUM -gt 1000 ];then
+    echo &quot;请输入小等于1000的数字。&quot;
+elif [ $NUM -lt 0 ];then
+    echo &quot;请输入大于等于0的数字。&quot;
+elif [ $NUM -eq $RDOM ];then
+    echo &quot;恭喜你，猜对了！！&quot;
+    echo &quot;你一共猜了 $TIMES次&quot;
+    exit 0
+elif [ $NUM -gt $RDOM ];then
+    echo &quot;你猜大了！！&quot;
+elif [ $NUM -lt $RDOM ];then
+    echo &quot;你猜小了！！&quot;
+else &quot;您的输入有误！！&quot;
+fi
+done
+</code></pre>
+<p><strong><font color="#0000dd">case条件测试语句</font></strong></p>
+<pre><code class="language-shell">#!/bin/bash
+#case语句，判断
+read -p &quot;Enter:&quot; KEY
+case &quot;$KEY&quot; in
+[a-z]|[A-Z])
+echo &quot;字母&quot;
+;;
+[0-9])
+echo &quot;数字&quot;
+;;
+*)
+echo &quot;错误&quot;
+;;
+esac
+</code></pre>
+<p><strong><font color="#0000dd">计划任务服务程序</font></strong></p>
+<p><strong>一次性的计划任务：at</strong>
+at 时间 &gt; reboot
+保存:Ctrl+D
+查看当前已有哪些计划任务 ：at -l
+查看命令：at -c 编码
+删除计划任务：atrm 编码 或者 at -r</p>
+<p> at命令的参数及其作用</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-f</td>
+<td>指定包含命令的任务文件</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>指定新任务名称</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>显示待执行任务列表</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>删除指定待执行任务</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>任务执行后给用户发邮件</td>
+</tr>
+</tbody></table>
+<pre><code class="language-shell">#让at命令接收前面echo命令的输出信息
+echo &quot;systemctl restart httpd&quot; | at 23:30
+</code></pre>
+<p>一般我们会使用“at now +2 MINUTE”的方式进行操作，这表示2分钟（MINUTE）后执行这个任务，也可以将其替代成小时（HOUR）、日（DAY）、月（MONTH）等词汇：</p>
+<pre><code class="language-shell">at now +2 MINUTE
+at&gt; systemctl restart httpd
+Ctrl+D
+</code></pre>
+<p><strong>周期性的计划任务：crond</strong></p>
+<p>crond 服务名称
+crontab 配置工具
+<font color="00dddd">分 时 日 月 星期 命令</font></p>
+<p>​     crontab命令的参数及其作用</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-e</td>
+<td>编辑计划任务</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>指定用户名称</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>列出任务列表</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>删除计划任务</td>
+</tr>
+</tbody></table>
+<p>​     使用crond设置任务的参数字段说明</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分钟</td>
+<td>取值为0～59的整数</td>
+</tr>
+<tr>
+<td>小时</td>
+<td>取值为0～23的任意整数</td>
+</tr>
+<tr>
+<td>日期</td>
+<td>取值为1～31的任意整数</td>
+</tr>
+<tr>
+<td>月份</td>
+<td>取值为1～12的任意整数</td>
+</tr>
+<tr>
+<td>星期</td>
+<td>取值为0～7的任意整数，其中0与7均为星期日</td>
+</tr>
+<tr>
+<td>命令</td>
+<td>要执行的命令或程序脚本</td>
+</tr>
+</tbody></table>
+<pre><code class="language-shell">crontab -e
+#分 时 日 月 星期 命令
+#每周日的0：30分重启
+30 0 * * 7 /usr/sbin/reboot
+#每隔两小时重启
+* */2 * * * /usr/sbin/reboot
+#每月的3-5号的2：30分重启
+30 2 3-5 * * /usr/sbin/reboot
+#每月的3号5号7号的2：30分重启
+30 2 3,5,7 * * /usr/sbin/reboot
+</code></pre>
+
+            ]]>
+        </content>
+    </entry>
     <entry>
         <title>345663</title>
         <author>
@@ -17,7 +635,7 @@
         <link href="http://koke.love/345663.html"/>
         <id>http://koke.love/345663.html</id>
 
-        <updated>2022-07-31T15:51:13+08:00</updated>
+        <updated>2022-07-31T16:11:48+08:00</updated>
             <summary>
                 <![CDATA[
                     43545 435435 5345
@@ -33,6 +651,10 @@
   <p>
     435435
   </p>
+
+    <h2>
+      十年之约
+    </h2>
 
   <p>
     5345
