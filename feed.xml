@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <title>我们的爱</title>
+    <title>我们</title>
     <link href="http://koke.love/feed.xml" rel="self" />
     <link href="http://koke.love" />
-    <updated>2022-07-31T16:18:46+08:00</updated>
+    <updated>2022-08-01T09:46:53+08:00</updated>
     <author>
         <name>koke</name>
     </author>
@@ -17,7 +17,7 @@
         <link href="http://koke.love/vimbian-ji-qi-yu-shellming-ling-jiao-ben.html"/>
         <id>http://koke.love/vimbian-ji-qi-yu-shellming-ling-jiao-ben.html</id>
 
-        <updated>2022-07-31T16:18:46+08:00</updated>
+        <updated>2022-08-01T09:46:53+08:00</updated>
             <summary>
                 <![CDATA[
                     vi/vim编辑器 vim编辑器有颜色，vi编辑器没有 默认打开：命令模式 编辑模式： i，a，o 末行模式： 进入到网卡配置文件所在的目录，然后编辑网卡配置文件，在其中填入下面的信息： [root@linuxprobe ~]# cd /etc/sysconfig/network-scripts/ [root@linuxprobe network-scripts]# vim ifcfg-ens160 TYPE=Ethernet BOOTPROTO=static NAME=ens160 ONBOOT=yes IPADDR=192.168.10.10 NETMASK=255.255.255.0 GATEWAY=192.168.10.1 DNS1=192.168.10.1 执行重启网卡设备的命令，然后通过ping命令测试网络能否连通。 systemctl restart network nmcli connection reload ens160 ping 192.168.10.10 Shell命令脚本 **1、 交互式（Interactive）**：用户每输入一条命令就立即执行。 **2、批处理（Batch）**：由用户事先编写好一个完整的Shell脚本，Shell会一次性执行脚本中诸多的命令。 脚本声明 #!/bin/bash 脚本注释 #txykoke.cn编写 脚本命令 ls pwd #!/bin/bash&hellip;
@@ -624,41 +624,6 @@ crontab 配置工具
 30 2 3,5,7 * * /usr/sbin/reboot
 </code></pre>
 
-            ]]>
-        </content>
-    </entry>
-    <entry>
-        <title>345663</title>
-        <author>
-            <name>koke</name>
-        </author>
-        <link href="http://koke.love/345663.html"/>
-        <id>http://koke.love/345663.html</id>
-
-        <updated>2022-07-31T16:11:48+08:00</updated>
-            <summary>
-                <![CDATA[
-                    43545 435435 5345
-                ]]>
-            </summary>
-        <content type="html">
-            <![CDATA[
-                
-  <p>
-    43545
-  </p>
-
-  <p>
-    435435
-  </p>
-
-    <h2>
-      十年之约
-    </h2>
-
-  <p>
-    5345
-  </p>
             ]]>
         </content>
     </entry>
